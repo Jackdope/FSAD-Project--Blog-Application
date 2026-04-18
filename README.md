@@ -102,26 +102,6 @@ PowerShell:
 [Convert]::ToBase64String((1..64 | ForEach-Object {Get-Random -Maximum 256}))
 ```
 
-## Push To GitHub Safely
-
-Run these commands from the `personal-blog` folder:
-
-```powershell
-git init
-git add .
-git commit -m "Initial secure publish"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<your-repo>.git
-git push -u origin main
-```
-
-Before pushing, verify no secrets are staged:
-
-```powershell
-git status
-git diff --cached
-```
-
 If a secret was committed by mistake, rotate it immediately (DB password, Gmail app password, JWT secret) and remove it from git history before sharing the repo.
 
 ## Security Considerations
