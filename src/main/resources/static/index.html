@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore inspiring stories, blogs, and articles from writers around the world on Bloggersverse.">
+    <title>Explore - Bloggersverse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=4">
+</head>
+<body class="bg-[#fafafa] text-gray-800 font-sans antialiased">
+    <!-- Navbar -->
+    <nav class="bg-white/80 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-200/50 group-hover:shadow-emerald-300/60 transition-shadow">
+                    <i class="fas fa-feather text-white text-sm"></i>
+                </div>
+                <span class="font-heading font-extrabold text-xl text-gray-900 tracking-tight">Bloggersverse</span>
+            </a>
+            <ul class="flex items-center gap-2">
+                <li><a href="index.html" class="px-4 py-2 text-sm font-semibold text-emerald-600 bg-emerald-50 rounded-full transition">Explore</a></li>
+                <li id="nav-user-links" style="display: none;">
+                    <a href="dashboard.html" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-full transition">Studio</a>
+                </li>
+                <li id="nav-auth-links" class="flex gap-2">
+                    <a href="login.html" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-full transition">Login</a>
+                    <a href="signup.html" class="px-5 py-2 text-sm font-semibold text-white bg-gray-900 hover:bg-gray-800 rounded-full transition shadow-sm">Sign Up</a>
+                </li>
+                <li id="nav-logout" style="display: none;">
+                    <a href="#" onclick="logout()" class="px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 hover:bg-red-50 rounded-full transition">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-28 md:py-36">
+            <div class="absolute inset-0">
+                <div class="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-sky-500/15 rounded-full blur-3xl"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="relative max-w-4xl mx-auto px-6 text-center">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-emerald-300 px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/10">
+                    <i class="fas fa-sparkles"></i>
+                    <span>Discover stories that inspire</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                    Explore Stories<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-sky-300 to-violet-300">That Matter</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">Discover blogs across different categories and ideas from writers around the world</p>
+                <button class="px-8 py-3.5 rounded-full bg-white text-gray-900 font-bold text-sm shadow-xl shadow-white/10 hover:shadow-white/20 hover:scale-105 transition-all duration-300 inline-flex items-center gap-2" onclick="document.getElementById('posts-container').scrollIntoView({behavior: 'smooth'})">
+                    Start Reading <i class="fas fa-arrow-down text-xs"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Category Section -->
+        <section class="max-w-6xl mx-auto px-6 py-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-10 text-center">Browse by Category</h2>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+                <div class="group flex flex-col items-center cursor-pointer" onclick="searchByTag('Adventure')">
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 ring-2 ring-transparent group-hover:ring-emerald-200">
+                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=300&q=80" alt="Adventure" class="w-full h-full object-cover">
+                    </div>
+                    <span class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">Adventure</span>
+                </div>
+                <div class="group flex flex-col items-center cursor-pointer" onclick="searchByTag('Food')">
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 ring-2 ring-transparent group-hover:ring-emerald-200">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=300&q=80" alt="Food" class="w-full h-full object-cover">
+                    </div>
+                    <span class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">Food</span>
+                </div>
+                <div class="group flex flex-col items-center cursor-pointer" onclick="searchByTag('Education')">
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 ring-2 ring-transparent group-hover:ring-emerald-200">
+                        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=300&q=80" alt="Education" class="w-full h-full object-cover">
+                    </div>
+                    <span class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">Education</span>
+                </div>
+                <div class="group flex flex-col items-center cursor-pointer" onclick="searchByTag('Technology')">
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 ring-2 ring-transparent group-hover:ring-emerald-200">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=300&q=80" alt="Technology" class="w-full h-full object-cover">
+                    </div>
+                    <span class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">Technology</span>
+                </div>
+                <div class="group flex flex-col items-center cursor-pointer" onclick="searchByTag('Travel')">
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 ring-2 ring-transparent group-hover:ring-emerald-200">
+                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=300&q=80" alt="Travel" class="w-full h-full object-cover">
+                    </div>
+                    <span class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">Travel</span>
+                </div>
+                <div class="group flex flex-col items-center cursor-pointer" onclick="searchByTag('Lifestyle')">
+                    <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 ring-2 ring-transparent group-hover:ring-emerald-200">
+                        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=300&q=80" alt="Lifestyle" class="w-full h-full object-cover">
+                    </div>
+                    <span class="mt-3 text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">Lifestyle</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Posts Section -->
+        <section class="max-w-7xl mx-auto px-6 pb-20">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-10 gap-4">
+                <h2 class="text-3xl font-bold text-gray-900">Latest Stories</h2>
+                <div class="flex w-full max-w-md bg-white rounded-full border border-gray-200 shadow-sm overflow-hidden focus-within:ring-2 focus-within:ring-emerald-200 focus-within:border-emerald-300 transition">
+                    <input type="text" id="search-input" placeholder="Search stories, tags..." class="flex-grow px-5 py-2.5 outline-none text-sm text-gray-700 bg-transparent placeholder-gray-400">
+                    <button onclick="handleSearchSubmit()" class="px-5 py-2.5 bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition">Search</button>
+                    <button onclick="resetSearch()" class="px-4 py-2.5 text-gray-400 hover:text-gray-600 text-sm font-medium transition border-l border-gray-100">Reset</button>
+                </div>
+            </div>
+
+            <div id="posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                <div class="col-span-full text-center py-20">
+                    <div class="inline-block p-4 bg-emerald-50 rounded-2xl mb-4">
+                        <i class="fas fa-spinner fa-spin text-emerald-500 text-2xl"></i>
+                    </div>
+                    <p class="text-gray-400 font-medium">Loading stories...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Post Detail Modal -->
+        <div id="postModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 overflow-y-auto">
+            <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+                <button class="absolute top-5 right-5 z-10 bg-white/90 backdrop-blur hover:bg-gray-100 text-gray-500 hover:text-gray-800 rounded-full w-10 h-10 flex items-center justify-center transition shadow-sm" onclick="closePostModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div id="modal-body" class="p-8">
+                    <!-- Post details will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-500 py-10 text-center mt-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-feather text-white text-xs"></i>
+                </div>
+                <span class="font-heading font-bold text-gray-300">Bloggersverse</span>
+            </div>
+            <p class="text-sm">&copy; 2026 Bloggersverse. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/home.js?v=4"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+/* ========================
+   Bloggersverse – Custom Styles
+   Complementary to Tailwind CSS
+   ======================== */
+
+/* Ensure handwriting font loads even if HTML link order/cache is wrong */
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+/* Bungee (local, OFL) — headings & brand */
+@font-face {
+    font-family: 'Bungee';
+    src: url('../fonts/bloggerverse/Bungee-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Headings + logo wordmark — !important so body default never wins */
+h1, h2, h3, h4, h5, h6,
+.font-heading {
+    font-family: 'Bungee', cursive !important;
+    font-weight: 400 !important;
+}
+
+/* Post body / excerpts — !important so Tailwind utilities never override */
+.bv-post-body,
+.font-post,
+textarea.bv-post-body {
+    font-family: "Shadows Into Light", cursive !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Body defaults — Inter for UI; !important beats Tailwind layer quirks */
+body {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Line clamp utilities (fallback for older browsers) */
+.line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f8f8f8;
+}
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.15); }
+    50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.25); }
+}
+
+/* Prose styles for modal content */
+.prose p {
+    margin-bottom: 1rem;
+}
+.prose p:last-child {
+    margin-bottom: 0;
+}
+
+/* Message display styles for login/signup pages */
+.message {
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    display: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.message.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.message.success {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.message.error {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.message.info {
+    background-color: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+}
+
+/* Selection */
+::selection {
+    background: rgba(16, 185, 129, 0.15);
+    color: inherit;
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* Image error fallback */
+img {
+    image-rendering: auto;
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: #9ca3af;
+}
+
+/* Transition defaults */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

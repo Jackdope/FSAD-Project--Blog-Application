@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create, manage, and share your stories on Bloggersverse Studio.">
+    <title>Studio - Bloggersverse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=4">
+</head>
+<body class="bg-[#fafafa] font-sans antialiased">
+    <!-- Navbar -->
+    <nav class="bg-white/80 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-200/50 group-hover:shadow-emerald-300/60 transition-shadow">
+                    <i class="fas fa-feather text-white text-sm"></i>
+                </div>
+                <span class="font-heading font-extrabold text-xl text-gray-900 tracking-tight">Bloggersverse</span>
+            </a>
+            <ul class="flex items-center gap-2">
+                <li><a href="index.html" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-full transition">Explore</a></li>
+                <li><a href="dashboard.html" class="px-4 py-2 text-sm font-semibold text-emerald-600 bg-emerald-50 rounded-full transition">Studio</a></li>
+                <li><button onclick="logout()" class="px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 hover:bg-red-50 rounded-full transition">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 md:py-14">
+        <!-- Header -->
+        <div class="mb-12">
+            <div class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                <i class="fas fa-pen-nib"></i> Your Creative Space
+            </div>
+            <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">Studio</h1>
+            <p class="text-gray-400 mt-2 text-lg">Create, manage, and share your stories with the world</p>
+        </div>
+
+        <!-- Create New Post Section -->
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 md:p-10 mb-14">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-200/40">
+                    <i class="fas fa-pen-fancy text-white text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Create New Post</h2>
+                    <p class="text-sm text-gray-400">Share something amazing</p>
+                </div>
+            </div>
+
+            <form id="createPostForm" class="space-y-5">
+                <div>
+                    <label for="title" class="block text-sm font-semibold text-gray-700 mb-2">Post Title</label>
+                    <input type="text" id="title" name="title" required placeholder="Write an engaging title..."
+                           class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 outline-none transition bg-gray-50/50 focus:bg-white text-gray-800">
+                </div>
+
+                <div>
+                    <label for="content" class="block text-sm font-semibold text-gray-700 mb-2">Content</label>
+                    <textarea id="content" name="content" required rows="7" placeholder="Share your thoughts, stories, and ideas..."
+                              class="bv-post-body w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 outline-none transition bg-gray-50/50 focus:bg-white text-gray-800 text-lg resize-none" style="font-family: 'Shadows Into Light', cursive !important;"></textarea>
+                </div>
+
+                <!-- Cover Image: Upload Only -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Cover Image</label>
+                    <input type="hidden" id="imageUrl" name="imageUrl">
+                    <div class="flex gap-3">
+                        <input type="file" id="imageFile" name="imageFile" accept="image/*"
+                               class="flex-1 px-5 py-3 rounded-xl border border-gray-200 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 outline-none transition bg-gray-50/50 focus:bg-white text-gray-800 text-sm file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-600 hover:file:bg-emerald-100">
+                        <button type="button" id="uploadImageBtn" class="px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-xl shadow-sm transition-all inline-flex items-center gap-2 text-sm">
+                            <i class="fas fa-upload"></i> Upload
+                        </button>
+                    </div>
+                    <div id="imagePreview" class="mt-3 hidden">
+                        <img id="imagePreviewImg" src="" alt="Preview" class="h-40 rounded-xl object-cover border border-gray-100 shadow-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label for="category" class="block text-sm font-semibold text-gray-700 mb-2">Category</label>
+                        <select id="category" name="category" required class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 outline-none transition bg-gray-50/50 focus:bg-white text-gray-800 appearance-none cursor-pointer">
+                            <option value="" disabled selected>Select category...</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Food">Food</option>
+                            <option value="Lifestyle">Lifestyle</option>
+                            <option value="Education">Education</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="tags" class="block text-sm font-semibold text-gray-700 mb-2">Tags (comma-separated)</label>
+                        <input type="text" id="tags" name="tags" placeholder="coding, tutorial, web-dev"
+                               class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 outline-none transition bg-gray-50/50 focus:bg-white text-gray-800">
+                    </div>
+                </div>
+
+                <!-- Privacy Setting -->
+                <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100">
+                    <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center gap-2"><i class="fas fa-shield-alt text-emerald-500"></i>Privacy</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center gap-3 cursor-pointer p-3.5 rounded-xl border-2 border-transparent bg-white hover:border-emerald-200 transition has-[:checked]:border-emerald-400 has-[:checked]:bg-emerald-50/50">
+                            <input type="radio" name="privacy" value="public" checked class="w-4 h-4 text-emerald-500 cursor-pointer accent-emerald-500">
+                            <div>
+                                <span class="font-semibold text-gray-800 text-sm block"><i class="fas fa-globe text-emerald-500 mr-1"></i>Public</span>
+                                <span class="text-xs text-gray-400">Visible to everyone</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-3.5 rounded-xl border-2 border-transparent bg-white hover:border-amber-200 transition has-[:checked]:border-amber-400 has-[:checked]:bg-amber-50/50">
+                            <input type="radio" name="privacy" value="private" class="w-4 h-4 text-amber-500 cursor-pointer accent-amber-500">
+                            <div>
+                                <span class="font-semibold text-gray-800 text-sm block"><i class="fas fa-lock text-amber-500 mr-1"></i>Private</span>
+                                <span class="text-xs text-gray-400">Only you can see</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-200/40 hover:shadow-emerald-300/50 transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 text-sm">
+                    <i class="fas fa-rocket"></i> Publish Post
+                </button>
+                <div id="postMessage" class="text-sm font-medium empty:hidden"></div>
+            </form>
+        </div>
+
+        <!-- Your Posts Section -->
+        <div>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-gradient-to-br from-sky-400 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg shadow-sky-200/40">
+                    <i class="fas fa-book-open text-white text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Your Posts</h2>
+                    <p class="text-sm text-gray-400">Manage your published stories</p>
+                </div>
+            </div>
+
+            <div id="userPosts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="col-span-full py-20 text-center bg-white rounded-2xl border-2 border-dashed border-gray-200">
+                    <div class="inline-block p-4 bg-sky-50 rounded-2xl mb-4">
+                        <i class="fas fa-spinner fa-spin text-sky-500 text-2xl"></i>
+                    </div>
+                    <p class="text-gray-400 font-medium">Loading your posts...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Post Modal -->
+    <div id="editModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden justify-center items-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl w-full max-w-2xl shadow-2xl my-8 border border-gray-100">
+            <div class="p-7 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white rounded-t-3xl z-10">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-3">
+                    <div class="w-9 h-9 bg-sky-50 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-edit text-sky-500"></i>
+                    </div>
+                    Edit Post
+                </h2>
+                <button id="closeEditModalBtn" class="text-gray-400 hover:text-gray-600 transition w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="p-7 space-y-5">
+                <form id="editPostForm" class="space-y-5">
+                    <input type="hidden" id="editPostId">
+
+                    <div>
+                        <label for="editTitle" class="block text-sm font-semibold text-gray-700 mb-2">Title</label>
+                        <input type="text" id="editTitle" required class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 outline-none transition">
+                    </div>
+
+                    <div>
+                        <label for="editContent" class="block text-sm font-semibold text-gray-700 mb-2">Content</label>
+                        <textarea id="editContent" required rows="6" class="bv-post-body w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 outline-none transition text-lg resize-none" style="font-family: 'Shadows Into Light', cursive !important;"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="editImageUrl" class="block text-sm font-semibold text-gray-700 mb-2">Cover Image URL</label>
+                        <input type="text" id="editImageUrl" class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 outline-none transition">
+                    </div>
+
+                    <div>
+                        <label for="editCategory" class="block text-sm font-semibold text-gray-700 mb-2">Category</label>
+                        <select id="editCategory" required class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 outline-none transition appearance-none bg-white cursor-pointer">
+                            <option value="Technology">Technology</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Food">Food</option>
+                            <option value="Lifestyle">Lifestyle</option>
+                            <option value="Education">Education</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Privacy Setting Edit -->
+                    <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100">
+                        <label class="block text-sm font-bold text-gray-700 mb-3 flex items-center gap-2"><i class="fas fa-shield-alt text-sky-500"></i>Privacy</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="flex items-center gap-3 cursor-pointer p-3.5 rounded-xl border-2 border-transparent bg-white hover:border-sky-200 transition has-[:checked]:border-sky-400 has-[:checked]:bg-sky-50/50">
+                                <input type="radio" name="editPrivacy" value="public" checked class="w-4 h-4 text-sky-500 cursor-pointer accent-sky-500" id="editPublicPost">
+                                <div>
+                                    <span class="font-semibold text-gray-800 text-sm block"><i class="fas fa-globe text-sky-500 mr-1"></i>Public</span>
+                                    <span class="text-xs text-gray-400">Everyone can view</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer p-3.5 rounded-xl border-2 border-transparent bg-white hover:border-amber-200 transition has-[:checked]:border-amber-400 has-[:checked]:bg-amber-50/50">
+                                <input type="radio" name="editPrivacy" value="private" class="w-4 h-4 text-amber-500 cursor-pointer accent-amber-500" id="editPrivatePost">
+                                <div>
+                                    <span class="font-semibold text-gray-800 text-sm block"><i class="fas fa-lock text-amber-500 mr-1"></i>Private</span>
+                                    <span class="text-xs text-gray-400">Only you can view</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                        <button type="button" id="cancelEditBtn" class="px-5 py-2.5 rounded-xl text-gray-600 hover:bg-gray-100 font-semibold transition text-sm">Cancel</button>
+                        <button type="submit" class="px-6 py-2.5 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-xl shadow-sm transition text-sm inline-flex items-center gap-2">
+                            <i class="fas fa-check"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js?v=4"></script>
+</body>
+</html>
